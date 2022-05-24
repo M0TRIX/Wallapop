@@ -1,0 +1,13 @@
+//
+//  URLElement.swift
+//  HomeTask
+//
+//  Created by Ali Asadi on 3/3/1401 AP.
+//
+
+import Foundation
+
+struct URLElement: Codable {
+    let type: URLType
+    let url: String
+}
