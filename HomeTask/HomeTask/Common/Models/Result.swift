@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Result: Codable {
+struct Result: Decodable {
     let id: Int
     let name, resultDescription: String
-    let modified: Date
+    let modified: String
     let thumbnail: Thumbnail
     let resourceURI: String
     let comics, series: Comics
@@ -21,6 +21,6 @@ struct Result: Codable {
     enum CodingKeys: String, CodingKey {
         case id, name
         case resultDescription = "description"
-        case modified, thumbnail, resourceURI, comics, series, stories, events, urls
+        case modified,thumbnail, resourceURI, comics, series, stories, events, urls
     }
 }

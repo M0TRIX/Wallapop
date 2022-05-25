@@ -12,4 +12,10 @@ struct Comics: Codable {
     let collectionURI: String
     let items: [ComicsItem]
     let returned: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case available, collectionURI
+        case items
+        case returned
+    }
 }

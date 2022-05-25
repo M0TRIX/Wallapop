@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct DataClass: Codable {
-    let offset, limit, total, count: Int
-    let results: [Result]
+struct DataClass: Decodable {
+    let offset, limit, total, count: Int?
+    let results: [Result]?
+    
+    enum CodingKeys: String, CodingKey {
+        case offset, limit, total, count
+        case results
+    }
+    
 }

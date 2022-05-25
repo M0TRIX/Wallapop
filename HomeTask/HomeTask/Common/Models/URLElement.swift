@@ -10,4 +10,8 @@ import Foundation
 struct URLElement: Codable {
     let type: URLType
     let url: String
+    
+    enum CodingKeys: String, CodingKey {
+        case type, url
+    }
 }
