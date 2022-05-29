@@ -24,4 +24,6 @@ struct Result: Decodable {
         case comic = "comics"
         case modified,thumbnail, resourceURI, series, story = "stories", events, urls
     }
+    init() {
+    }
 }

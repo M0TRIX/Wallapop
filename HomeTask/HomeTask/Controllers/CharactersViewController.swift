@@ -20,7 +20,7 @@ class CharactersViewController: UIViewController {
         
         self.tableView.rowHeight  = UITableView.automaticDimension
         
-        viewModel = CharactersViewModel(serviceApi: ServiceApi(), controller: self)
+        viewModel = CharactersViewModel(serviceApi: ServiceApi(), controller: self,movieList:[],filteredListOfChars: [])
         getAllCharacters()
     }
     
@@ -60,9 +60,7 @@ extension CharactersViewController: UISearchBarDelegate{
             self?.tableView.reloadData()
         })
     }
-    
 }
-
 
 extension CharactersViewController: UIViewControllerTransitioningDelegate,UINavigationControllerDelegate {
     

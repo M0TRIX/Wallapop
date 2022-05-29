@@ -55,11 +55,9 @@ class CharDetailViewController: UIViewController {
             }
         })
     }
-    
 }
 
 extension CharDetailViewController: UICollectionViewDelegate,UICollectionViewDataSource{
-    
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == comicCollectionView {
@@ -75,7 +73,6 @@ extension CharDetailViewController: UICollectionViewDelegate,UICollectionViewDat
             cell.bind(object: CharDetailViewModel?.storiesList?[indexPath.row] ?? "")
             return cell
         }
-
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == comicCollectionView {
@@ -87,6 +84,3 @@ extension CharDetailViewController: UICollectionViewDelegate,UICollectionViewDat
         }
     }
 }
-
-
-

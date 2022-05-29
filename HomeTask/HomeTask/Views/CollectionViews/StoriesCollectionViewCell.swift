@@ -18,7 +18,6 @@ class StoriesCollectionViewCell:UICollectionViewCell,BaseCollectionViewCell{
         if let content = object as? Stories {
             name.text = content.title
             resultDescription.text = content.resultDescription
-   
             self.date.text = content.modified 
         }
     }

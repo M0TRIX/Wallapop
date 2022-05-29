@@ -15,7 +15,7 @@ class CharactersViewModel:CharactersProtocols{
     var movieList = [Result]()
     var filteredListOfChars: [Result]?
     
-    init(serviceApi:ServiceApi,controller:UIViewController) {
+    init(serviceApi:ServiceApi,controller:UIViewController,movieList:[Result],filteredListOfChars:[Result]) {
         self.serviceApi = serviceApi
         self.controller = controller
     }
