@@ -13,4 +13,6 @@ protocol CharactersProtocols {
     var controller:UIViewController? { get set }
     var movieList: [Result] { get set }
     func getAllCharacters(completion:@escaping([Result])->())
+    var filteredListOfChars:[Result]? { get set }
+    func filteringData(searchText:String,compilition:@escaping()->())
 }

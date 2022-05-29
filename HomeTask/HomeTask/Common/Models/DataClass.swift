@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct DataClass: Decodable {
+struct DataClass<T:Decodable>: Decodable {
     let offset, limit, total, count: Int?
-    let results: [Result]?
+    let results: [T]? // Result
     
     enum CodingKeys: String, CodingKey {
         case offset, limit, total, count

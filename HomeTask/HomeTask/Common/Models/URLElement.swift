@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct URLElement: Codable {
+struct URLElement: Decodable {
     let type: URLType
     let url: String
     
     enum CodingKeys: String, CodingKey {
-        case type, url
+        case url,type
     }
 }

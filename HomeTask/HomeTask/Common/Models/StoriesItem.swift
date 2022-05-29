@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StoriesItem: Codable {
+struct StoriesItem: Decodable {
     let resourceURI: String
     let name: String
     let type: ItemType

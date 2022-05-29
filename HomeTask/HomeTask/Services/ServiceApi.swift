@@ -10,27 +10,61 @@ import Foundation
 
 class ServiceApi {
     
-    func getAllCharacters(completion:@escaping(Landing, URLResponse,Data)->()){
-        let url = "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=3fd2f49ed647cb7d5649fb341e35cffc&hash=3ea2cc18772868c32216839754e740e1"
+    func getAllCharacters(completion:@escaping(Landing<Result>, URLResponse,Data)->()){
+        let domain = Domain()
+        var url = domain.getFullDomain() + APIs.CHARACTERS.rawValue
+        url = url + "?ts=1&apikey="  + domain.public_key + "&" + "hash=" + domain.getHash()
         let urlRequest = URLRequest(url: URL(string: url)!)
         
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else { return }
             let decoder = JSONDecoder()
-            let content = try? decoder.decode(Landing.self, from: data)
-            completion(content!,response ?? URLResponse(),data)
+            if let content = try? decoder.decode(Landing<Result>.self, from: data) {
+                completion(content,response ?? URLResponse(),data)
+            }
         }.resume()
     }
     
-    func getOneCharacter(characterId:String,completion:@escaping(Landing, URLResponse,Data)->()){
-        let url = "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=3fd2f49ed647cb7d5649fb341e35cffc&hash=3ea2cc18772868c32216839754e740e1"
-        let urlRequest = URLRequest(url: URL(string: url)!)
-        
+    func getAllComicsByCharacter(url:String,completion:@escaping(Landing<Comics>, URLResponse,Data)->()){
+        let domain = Domain()
+        let urlStr = url + "?ts=1&apikey="  + domain.public_key + "&" + "hash=" + domain.getHash()
+        let urlRequest = URLRequest(url: URL(string: urlStr)!)
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else { return }
             let decoder = JSONDecoder()
-            let content = try? decoder.decode(Landing.self, from: data)
-            completion(content!,response ?? URLResponse(),data)
+            
+            if let content = try? decoder.decode(Landing<Comics>.self, from: data) {
+            completion(content,response ?? URLResponse(),data)
+            }
+            
+        }.resume()
+    }
+    
+    func getAllSeries(url:String,completion:@escaping(Landing<Series>, URLResponse,Data)->()){
+        let domain = Domain()
+        let urlStr = url + "?ts=1&apikey="  + domain.public_key + "&" + "hash=" + domain.getHash()
+        let urlRequest = URLRequest(url: URL(string: urlStr)!)
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            guard let data = data else { return }
+            let decoder = JSONDecoder()
+            if let content = try? decoder.decode(Landing<Series>.self, from: data) {
+            completion(content,response ?? URLResponse(),data)
+            }
+            
+        }.resume()
+    }
+    
+    func getAllStories(url:String,completion:@escaping(Landing<Stories>, URLResponse,Data)->()){
+        let domain = Domain()
+        let urlStr = url + "?ts=1&apikey="  + domain.public_key + "&" + "hash=" + domain.getHash()
+        let urlRequest = URLRequest(url: URL(string: urlStr)!)
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            guard let data = data else { return }
+            let decoder = JSONDecoder()
+            if let content = try? decoder.decode(Landing<Stories>.self, from: data) {
+            completion(content,response ?? URLResponse(),data)
+            }
+            
         }.resume()
     }
     

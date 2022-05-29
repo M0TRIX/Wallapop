@@ -13,14 +13,15 @@ struct Result: Decodable {
     let modified: String
     let thumbnail: Thumbnail
     let resourceURI: String
-    let comics, series: Comics
-    let stories: Stories
-    let events: Comics
+    let comic, series: Comic
+    let story: Story
+    let events: Comic
     let urls: [URLElement]
 
     enum CodingKeys: String, CodingKey {
         case id, name
         case resultDescription = "description"
-        case modified,thumbnail, resourceURI, comics, series, stories, events, urls
+        case comic = "comics"
+        case modified,thumbnail, resourceURI, series, story = "stories", events, urls
     }
 }

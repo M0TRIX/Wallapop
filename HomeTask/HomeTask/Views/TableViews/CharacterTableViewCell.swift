@@ -20,10 +20,7 @@ class CharacterTableViewCell:UITableViewCell, BaseTableViewCell {
             resultDescription.text = content.resultDescription
             let ex = content.thumbnail.thumbnailExtension.rawValue
                 let url = content.thumbnail.path + "." + ex
-                DispatchQueue.main.async {
                     self.thumbnail.loadImageByUrl(urlString: url)
-                }
-           
         }
     }
 }

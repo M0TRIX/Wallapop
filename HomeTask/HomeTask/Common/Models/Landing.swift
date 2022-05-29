@@ -7,11 +7,11 @@
 
 import Foundation
  
-struct Landing: Decodable {
+struct Landing<T:Decodable>: Decodable {
     let code: Int?
     let status, copyright, attributionText, attributionHTML: String?
     let etag: String?
-    let data: DataClass?
+    let data: DataClass<T>?
     
     enum CodingKeys: String, CodingKey {
         case code, status, copyright,attributionText,attributionHTML

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Extension: String, Codable {
+enum Extension: String, Decodable {
     case gif = "gif"
     case jpg = "jpg"
 }
