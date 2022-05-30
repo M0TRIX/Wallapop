@@ -9,9 +9,9 @@ import Foundation
 enum PriceType: String, Decodable {
     case digitalPurchasePrice = "digitalPurchasePrice"
     case printPrice = "printPrice"
-
+    
     init(from decoder: Decoder) throws {
-      let label = try decoder.singleValueContainer().decode(String.self)
-      self = PriceType(rawValue: label) ?? .digitalPurchasePrice
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = PriceType(rawValue: label) ?? .digitalPurchasePrice
     }
 }

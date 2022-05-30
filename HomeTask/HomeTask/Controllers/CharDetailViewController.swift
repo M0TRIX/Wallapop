@@ -8,17 +8,17 @@
 import UIKit
 
 class CharDetailViewController: UIViewController {
-
+    
     @IBOutlet weak var comicCollectionView:UICollectionView!
     @IBOutlet weak var seriesCollectionVIew: UICollectionView!
     @IBOutlet weak var storiesCollectionView:UICollectionView!
     
     var result:Result?
     var CharDetailViewModel:CharactersDetailViewModel?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationItem.title = result?.name
         
         CharDetailViewModel = CharactersDetailViewModel(serviceApi: ServiceApi(), controller: self,comicList: [], seriesList: [], storiesList: [])
@@ -31,9 +31,9 @@ class CharDetailViewController: UIViewController {
     @IBAction func backAction(_ sender: Any) {
         self.dismiss(animated: true)
     }
-   
+    
     func getAllComics(){
-        CharDetailViewModel?.getAllComics(comicCollectionUrl: result?.comic.collectionURI ?? "", completion: { [weak self] _ in
+        CharDetailViewModel?.getAllComics(comicCollectionUrl: result?.comic?.collectionURI ?? "", completion: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.comicCollectionView.reloadData()
             }
@@ -41,7 +41,7 @@ class CharDetailViewController: UIViewController {
     }
     
     func getAllSeries(){
-        CharDetailViewModel?.getAllSeries(serieCollectionUrl: result?.series.collectionURI ?? "", completion: { [weak self] _ in
+        CharDetailViewModel?.getAllSeries(serieCollectionUrl: result?.series?.collectionURI ?? "", completion: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.seriesCollectionVIew.reloadData()
             }
@@ -49,7 +49,7 @@ class CharDetailViewController: UIViewController {
     }
     
     func getAllStories(){
-        CharDetailViewModel?.getAllStories(storyCollectionUrl: result?.story.collectionURI ?? "", completion: { [weak self] _ in
+        CharDetailViewModel?.getAllStories(storyCollectionUrl: result?.story?.collectionURI ?? "", completion: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.storiesCollectionView.reloadData()
             }
@@ -58,7 +58,7 @@ class CharDetailViewController: UIViewController {
 }
 
 extension CharDetailViewController: UICollectionViewDelegate,UICollectionViewDataSource{
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == comicCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicListIdentifier", for: indexPath) as! ComicCollectionViewCell

@@ -8,15 +8,15 @@
 import Foundation
 
 struct Result: Decodable {
-    let id: Int
-    let name, resultDescription: String
-    let modified: String
-    let thumbnail: Thumbnail
-    let resourceURI: String
-    let comic, series: Comic
-    let story: Story
-    let events: Comic
-    let urls: [URLElement]
+    var id: Int?
+    var name, resultDescription: String?
+    var modified: String?
+    var thumbnail: Thumbnail?
+    var resourceURI: String?
+    var comic, series: Comic?
+    var story: Story?
+    var events: Comic?
+    var urls: [URLElement]?
 
     enum CodingKeys: String, CodingKey {
         case id, name

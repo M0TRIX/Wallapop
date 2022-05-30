@@ -17,20 +17,14 @@ struct Comics: Decodable {
     let ean, issn: String?
     let format: String?
     let pageCount: Int?
-    // let textObjects: [TextObject]
     let resourceURI: String?
     let urls: [URLElement]?
      let serie: Serie
     let variants: [Serie]
-      //let collections, collectedIssues: [JSONAny]
-    // let dates: [DateElement]
     let prices: [Price]
     let thumbnail: Thumbnail
     let images: [Thumbnail]
-    // let creators: Creators
-   //  let characters: Characters
     let storie: Story
-    // let events: Characters
     
     enum CodingKeys: String, CodingKey {
         case id

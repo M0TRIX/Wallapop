@@ -17,8 +17,6 @@ struct Series: Decodable {
        let rating, type: String
        let modified: String
        let thumbnail: Thumbnail
-      // let creators: Creators
-     //  let characters: Characters
        let storie: Story
       // let comics, events: Characters
       // let next, previous: String?

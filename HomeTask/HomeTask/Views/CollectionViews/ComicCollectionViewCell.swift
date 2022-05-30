@@ -14,7 +14,6 @@ class ComicCollectionViewCell:UICollectionViewCell, BaseCollectionViewCell{
     @IBOutlet weak var resultDescription:UILabel!
     @IBOutlet weak var price:UILabel!
     @IBOutlet weak var avatar:UIImageView!
-
     @IBOutlet weak var mainView: UIView!
     
     func bind(object: Any) {

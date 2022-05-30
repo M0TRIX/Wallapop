@@ -50,7 +50,6 @@ class ServiceApi {
             if let content = try? decoder.decode(Landing<Series>.self, from: data) {
             completion(content,response ?? URLResponse(),data)
             }
-            
         }.resume()
     }
     

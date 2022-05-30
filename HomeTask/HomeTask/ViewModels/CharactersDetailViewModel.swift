@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class CharactersDetailViewModel:CharactersDetailProtocols{
-     
+    
     var seriesList: [Series]?
     var comicList: [Comics]?
     var storiesList: [Stories]?
@@ -26,7 +26,7 @@ class CharactersDetailViewModel:CharactersDetailProtocols{
     
     func getAllComics(comicCollectionUrl:String,completion: @escaping ([Comics]) -> ()) {
         serviceApi?.getAllComicsByCharacter(url: comicCollectionUrl, completion: { landing, response, data in
-
+            
             let responseResult = ServiceValidator.checkResposnse(response: response, data: data)
             
             if responseResult == ServiceError.SUCCESS {

@@ -9,7 +9,7 @@ import Foundation
 
 struct DataClass<T:Decodable>: Decodable {
     let offset, limit, total, count: Int?
-    let results: [T]? // Result
+    let results: [T]?
     
     enum CodingKeys: String, CodingKey {
         case offset, limit, total, count

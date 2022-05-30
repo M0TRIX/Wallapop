@@ -13,10 +13,7 @@ struct Stories:Decodable {
     let type: String
     let modified: String
     let thumbnail: Thumbnail?
-    // let creators: Creators
-   // let characters, series, comics, events: Result
-    // let originalIssue: OriginalIssue
-    
+  
     enum CodingKeys: String, CodingKey {
         case id, title
         case resultDescription = "description"

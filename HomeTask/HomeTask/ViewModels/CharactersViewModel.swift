@@ -41,9 +41,8 @@ class CharactersViewModel:CharactersProtocols{
         if searchText.isEmpty {
             filteredListOfChars = movieList
         }else{
-            filteredListOfChars = movieList.filter { $0.name.contains(searchText)}
+            filteredListOfChars = movieList.filter { $0.name!.contains(searchText)}
         }
         compilition()
     }
-    
 }

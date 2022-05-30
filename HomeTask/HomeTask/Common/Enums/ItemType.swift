@@ -13,8 +13,8 @@ enum ItemType: String, Decodable {
     case interiorStory = "interiorStory"
     
     init(from decoder: Decoder) throws {
-      let label = try decoder.singleValueContainer().decode(String.self)
-      self = ItemType(rawValue: label) ?? .empty
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = ItemType(rawValue: label) ?? .empty
     }
     
 }

@@ -47,13 +47,13 @@ class CheckResponseTestCases: XCTestCase {
     
     func testCheckResponseWithUNAUTHORIZE(){
         let response = HTTPURLResponse(url: url, statusCode: 401, httpVersion: "", headerFields: ["":""])
-        let result = ServiceValidator.checkResposnse(response: response!, data: nil)
+        let result = ServiceValidator.checkResposnse(response: response!, data: Data.init())
         XCTAssertEqual(result, ServiceError.UNAUTHORIZE)
     }
     
     func testCheckResponseWithServerError(){
         let response = HTTPURLResponse(url: url, statusCode: 500, httpVersion: "", headerFields: ["":""])
-        let result = ServiceValidator.checkResposnse(response: response!, data: nil)
+        let result = ServiceValidator.checkResposnse(response: response!, data: Data.init())
         XCTAssertEqual(result, ServiceError.SERVERERROR)
     }
   

@@ -13,7 +13,7 @@ enum URLType: String, Decodable {
     case wiki = "wiki"
     
     init(from decoder: Decoder) throws {
-      let label = try decoder.singleValueContainer().decode(String.self)
-      self = URLType(rawValue: label) ?? .wiki
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = URLType(rawValue: label) ?? .wiki
     }
 }
