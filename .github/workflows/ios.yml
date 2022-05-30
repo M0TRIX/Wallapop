@@ -17,4 +17,4 @@ jobs:
       run: sudo xcode-select -switch /Applications/Xcode_13.2.app
 
     - name: Build and test
-      run: xcodebuild \test \-project HomeTask/HomeTask.xcodeproj \-scheme HomeTask\ -destination 'platform=iOS Simulator,name=iPhone 13'
+      run: xcodebuild \test \-project HomeTask/HomeTask.xcodeproj -scheme HomeTask -destination 'platform=iOS Simulator,name=iPhone 13'
