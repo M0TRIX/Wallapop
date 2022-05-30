@@ -14,6 +14,7 @@ class CharactersDetailViewModelTestCases: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        
     }
 
     func testServiceApiWithNotNil(){
