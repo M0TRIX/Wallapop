@@ -13,7 +13,8 @@ struct Result: Decodable {
     var modified: String?
     var thumbnail: Thumbnail?
     var resourceURI: String?
-    var comic, series: Comic?
+    var comic:Comic?
+    var series: Comic?
     var story: Story?
     var events: Comic?
     var urls: [URLElement]?
@@ -22,7 +23,11 @@ struct Result: Decodable {
         case id, name
         case resultDescription = "description"
         case comic = "comics"
-        case modified,thumbnail, resourceURI, series, story = "stories", events, urls
+        case story = "stories"
+        case modified
+        case thumbnail
+        case resourceURI, series
+        case events, urls
     }
     init() {
     }

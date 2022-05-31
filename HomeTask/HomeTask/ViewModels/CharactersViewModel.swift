@@ -9,11 +9,16 @@ import Foundation
 import UIKit
 
 class CharactersViewModel:CharactersProtocols{
-    
+ 
     var serviceApi:ServiceApi?
     var controller:UIViewController?
     var movieList = [Result]()
     var filteredListOfChars: [Result]?
+    var totalElement: Int?
+    var offset: Int?
+    var limit: Int?
+    var page: Int?
+    var isLoading:Bool?
     
     init(serviceApi:ServiceApi,controller:UIViewController,movieList:[Result],filteredListOfChars:[Result]) {
         self.serviceApi = serviceApi
@@ -21,14 +26,15 @@ class CharactersViewModel:CharactersProtocols{
     }
     
     func getAllCharacters(completion: @escaping ([Result]) -> ()) {
-        
-        serviceApi?.getAllCharacters { [weak self] landing,response,data in
+        self.isLoading = true
+        serviceApi?.getAllCharacters(offset: self.offset ?? 0) { [weak self] landing,response,data in
             
             let responseResult = ServiceValidator.checkResposnse(response: response, data: data)
-            
+            self?.isLoading = false
             if responseResult == ServiceError.SUCCESS {
                 self?.movieList = landing.data!.results ?? []
-                self?.filteredListOfChars = landing.data!.results ?? []
+                self?.filteredListOfChars = (self?.filteredListOfChars ?? []) + (landing.data!.results ?? [])
+                self?.totalElement = landing.data?.total
                 completion(landing.data!.results ?? [])
             }else{
                 MessageUtill.makeMessage(title: "Network call error", body: "\(responseResult)", controller: self?.controller ?? UIViewController())

@@ -46,16 +46,26 @@ extension CharactersViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if let value = viewModel?.filteredListOfChars?[indexPath.row] {
             self.createInstance(filteredObject: value)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (self.viewModel?.filteredListOfChars?.count ?? 0) - 1 {
+            if self.viewModel?.filteredListOfChars?.count ?? 0 < self.viewModel?.totalElement ?? 0 {
+                if (!(self.viewModel?.isLoading ?? false)) {
+                    self.viewModel?.page=(self.viewModel?.page ?? 0) + 1
+                    self.viewModel?.offset=(self.viewModel?.limit ?? 20) * (self.viewModel?.page ?? 1)
+                    getAllCharacters()
+                }
+            }
         }
     }
 }
 
 extension CharactersViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
         self.viewModel?.filteringData(searchText: searchText, compilition: { [weak self] in
             self?.tableView.reloadData()
         })

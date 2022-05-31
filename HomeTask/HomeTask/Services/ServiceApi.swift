@@ -6,22 +6,22 @@
 //
 
 import Foundation
-import Foundation
 
 class ServiceApi {
     
-    func getAllCharacters(completion:@escaping(Landing<Result>, URLResponse,Data)->()){
+    func getAllCharacters(offset:Int,completion:@escaping(Landing<Result>, URLResponse,Data)->()){
         let domain = Domain()
-        var url = domain.getFullDomain() + APIs.CHARACTERS.rawValue
-        url = url + "?ts=1&apikey="  + domain.public_key + "&" + "hash=" + domain.getHash()
+        var url = domain.getFullDomain() + APIs.CHARACTERS.rawValue + "?offset=" + "\(offset)" + "?limit=20"
+        url = url + "&ts=1&apikey="  + domain.public_key + "&" + "hash=" + domain.getHash()
         let urlRequest = URLRequest(url: URL(string: url)!)
-        
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else { return }
             let decoder = JSONDecoder()
-            if let content = try? decoder.decode(Landing<Result>.self, from: data) {
-                completion(content,response ?? URLResponse(),data)
-            }
+            let convertedString = String(data: data, encoding: String.Encoding.utf8)
+             let content = try? decoder.decode(Landing<Result>.self, from: data)
+            completion(content!,response ?? URLResponse(),data)
+                 
+            
         }.resume()
     }
     

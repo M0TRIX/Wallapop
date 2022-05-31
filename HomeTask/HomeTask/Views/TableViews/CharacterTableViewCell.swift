@@ -18,7 +18,7 @@ class CharacterTableViewCell:UITableViewCell, BaseTableViewCell {
         if let content = object as? Result {
             name.text = content.name
             resultDescription.text = content.resultDescription
-            let ex = content.thumbnail?.thumbnailExtension.rawValue ?? "jpg"
+            let ex = content.thumbnail?.thumbnailExtension?.rawValue ?? "jpg"
             let url = (content.thumbnail?.path ?? "") + ("." + ex)
             self.thumbnail.loadImageByUrl(urlString: url)
         }

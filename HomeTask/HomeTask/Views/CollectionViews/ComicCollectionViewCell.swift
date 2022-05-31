@@ -20,8 +20,8 @@ class ComicCollectionViewCell:UICollectionViewCell, BaseCollectionViewCell{
         if let content = object as? Comics {
             name.text = content.title
             resultDescription.text = content.resultDescription
-            let ex = content.thumbnail.thumbnailExtension.rawValue
-            let url = content.thumbnail.path + "." + ex
+            let ex = content.thumbnail.thumbnailExtension?.rawValue ?? ""
+            let url = (content.thumbnail.path ?? "" ) + ("." + ex)
             self.avatar.loadImageByUrl(urlString: url)
         }
     }
