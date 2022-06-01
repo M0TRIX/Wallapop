@@ -17,7 +17,6 @@ class ServiceApi {
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else { return }
             let decoder = JSONDecoder()
-            let convertedString = String(data: data, encoding: String.Encoding.utf8)
              let content = try? decoder.decode(Landing<Result>.self, from: data)
             completion(content!,response ?? URLResponse(),data)
                  
@@ -25,9 +24,9 @@ class ServiceApi {
         }.resume()
     }
     
-    func getAllComicsByCharacter(url:String,completion:@escaping(Landing<Comics>, URLResponse,Data)->()){
+    func getAllComicsByCharacter(offset:Int,url:String,completion:@escaping(Landing<Comics>, URLResponse,Data)->()){
         let domain = Domain()
-        let urlStr = url + "?ts=1&apikey="  + domain.public_key + "&" + "hash=" + domain.getHash()
+        let urlStr = url + "?offset=" + "\(offset)" + "?limit=20" + "&ts=1&apikey="  + domain.public_key + "&" + "hash=" + domain.getHash()
         let urlRequest = URLRequest(url: URL(string: urlStr)!)
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else { return }

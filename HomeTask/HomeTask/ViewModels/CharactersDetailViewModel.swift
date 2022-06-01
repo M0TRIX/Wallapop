@@ -16,6 +16,24 @@ class CharactersDetailViewModel:CharactersDetailProtocols{
     var serviceApi: ServiceApi?
     var controller: UIViewController?
     
+    var totalElementComics: Int?
+    var offsetComics: Int?
+    var limitComics: Int?
+    var pageComics: Int?
+    var isLoadingComics: Bool?
+    
+    var totalElementSeries: Int?
+    var offsetSeries: Int?
+    var limitSeries: Int?
+    var pageSeries: Int?
+    var isLoadingSeries: Bool?
+    
+    var totalElementStories: Int?
+    var offsetStories: Int?
+    var limitStories: Int?
+    var pageStories: Int?
+    var isLoadingStories: Bool?
+    
     init(serviceApi:ServiceApi,controller:UIViewController,comicList:[Comics],seriesList:[Series],storiesList:[Stories]) {
         self.serviceApi = serviceApi
         self.controller = controller
@@ -25,12 +43,14 @@ class CharactersDetailViewModel:CharactersDetailProtocols{
     }
     
     func getAllComics(comicCollectionUrl:String,completion: @escaping ([Comics]) -> ()) {
-        serviceApi?.getAllComicsByCharacter(url: comicCollectionUrl, completion: { landing, response, data in
+        self.isLoadingComics = true
+        serviceApi?.getAllComicsByCharacter(offset:self.offsetComics ?? 0,url: comicCollectionUrl, completion: { landing, response, data in
             
             let responseResult = ServiceValidator.checkResposnse(response: response, data: data)
+            self.isLoadingComics = false
             
             if responseResult == ServiceError.SUCCESS {
-                self.comicList = landing.data!.results ?? []
+                self.comicList = (self.comicList ?? [] ) + (landing.data!.results ?? [])
                 completion(landing.data!.results ?? [])
             }else{
                 MessageUtill.makeMessage(title: "Network call error", body: "\(responseResult)", controller: self.controller ?? UIViewController())
@@ -45,12 +65,11 @@ class CharactersDetailViewModel:CharactersDetailProtocols{
             let responseResult = ServiceValidator.checkResposnse(response: response, data: data)
             
             if responseResult == ServiceError.SUCCESS {
-                self.seriesList = landing.data!.results ?? []
+                self.seriesList = (self.seriesList ?? []) + (landing.data!.results ?? [])
                 completion(landing.data!.results ?? [])
             }else{
                 MessageUtill.makeMessage(title: "Network call error", body: "\(responseResult)", controller: self.controller ?? UIViewController())
             }
-            
         })
     }
     
@@ -60,12 +79,11 @@ class CharactersDetailViewModel:CharactersDetailProtocols{
             
             let responseResult = ServiceValidator.checkResposnse(response: response, data: data)
             if responseResult == ServiceError.SUCCESS {
-                self.storiesList = landing.data!.results ?? []
+                self.storiesList = (self.storiesList ?? []) + (landing.data!.results ?? [])
                 completion(landing.data!.results ?? [])
             }else{
                 MessageUtill.makeMessage(title: "Network call error", body: "\(responseResult)", controller: self.controller ?? UIViewController())
             }
-            
         })
     }
     

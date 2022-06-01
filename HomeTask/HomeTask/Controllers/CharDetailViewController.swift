@@ -83,4 +83,43 @@ extension CharDetailViewController: UICollectionViewDelegate,UICollectionViewDat
             return CharDetailViewModel?.storiesList?.count ?? 0
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if collectionView == comicCollectionView {
+            
+            if indexPath.row == (self.CharDetailViewModel?.comicList?.count ?? 0) - 1 {
+                if self.CharDetailViewModel?.comicList?.count ?? 0 < self.CharDetailViewModel?.totalElementComics ?? 0 {
+                    if (!(self.CharDetailViewModel?.isLoadingComics ?? false)) {
+                        self.CharDetailViewModel?.pageComics=(self.CharDetailViewModel?.pageComics ?? 0) + 1
+                        self.CharDetailViewModel?.offsetComics=(self.CharDetailViewModel?.limitComics ?? 20) * (self.CharDetailViewModel?.pageComics ?? 1)
+                        getAllComics()
+                    }
+                }
+            }
+            
+        }else if collectionView == seriesCollectionVIew {
+            if indexPath.row == (self.CharDetailViewModel?.seriesList?.count ?? 0) - 1 {
+                if self.CharDetailViewModel?.seriesList?.count ?? 0 < self.CharDetailViewModel?.totalElementSeries ?? 0 {
+                    if (!(self.CharDetailViewModel?.isLoadingSeries ?? false)) {
+                        self.CharDetailViewModel?.pageSeries=(self.CharDetailViewModel?.pageSeries ?? 0) + 1
+                        self.CharDetailViewModel?.offsetSeries=(self.CharDetailViewModel?.limitSeries ?? 20) * (self.CharDetailViewModel?.pageSeries ?? 1)
+                        getAllSeries()
+                    }
+                }
+            }
+        }else{
+            
+            if indexPath.row == (self.CharDetailViewModel?.storiesList?.count ?? 0) - 1 {
+                if self.CharDetailViewModel?.storiesList?.count ?? 0 < self.CharDetailViewModel?.totalElementStories ?? 0 {
+                    if (!(self.CharDetailViewModel?.isLoadingStories ?? false)) {
+                        self.CharDetailViewModel?.pageStories=(self.CharDetailViewModel?.pageStories ?? 0) + 1
+                        self.CharDetailViewModel?.offsetStories=(self.CharDetailViewModel?.limitStories ?? 20) * (self.CharDetailViewModel?.pageStories ?? 1)
+                        getAllStories()
+                    }
+                }
+            }
+        }
+        
+    }
 }
